@@ -1,29 +1,16 @@
-# vue-project
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+# Frontend Service
+## Установка
+1. Перейдите в директорию с фронтендом:
+```bash
+cd front/vue-project
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+2. Убедитесь, что у вас установлен Node.js и npm.
+3. Установите зависимости, выполнив команду:
+```bash
+npm install --legacy-peer-deps
+```
+## Запуск
+Запустите фронтенд сервис, используя команду:
+```bash
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
