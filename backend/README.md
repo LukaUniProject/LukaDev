@@ -31,7 +31,7 @@ venv\Scripts\activate
 
 ### Установите зависимости:
 ```bash
-pip install -r requirements.txt
+pip install -r API/requirements.txt
 ```
 
 ### Запустите проекта:
