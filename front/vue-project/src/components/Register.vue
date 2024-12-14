@@ -5,10 +5,6 @@
         <h2>Регистрация</h2>
         <form @submit.prevent="submitForm">
           <div class="form-group">
-            <label for="username">Имя пользователя</label>
-            <input type="text" id="username" v-model="username" required />
-          </div>
-          <div class="form-group">
             <label for="email">Электронная почта</label>
             <input type="email" id="email" v-model="email" required />
           </div>
@@ -32,23 +28,48 @@
     </div>
   </template>
   
+
   <script>
+  import axios from "axios";
+  
   export default {
     data() {
       return {
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        errorMessage: '',
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        errorMessage: "",
+        isSubmitting: false,
       };
     },
     methods: {
       goBack() {
         this.$router.go(-1);
       },
-      submitForm() {
-
+      async submitForm() {
+        if (this.password !== this.confirmPassword) {
+          this.errorMessage = "Пароли не совпадают!";
+          return;
+        }
+  
+        this.isSubmitting = true;
+        this.errorMessage = "";
+  
+        try {
+          const response = await axios.post("http://127.0.0.1:8000/api/auth/register", {
+            email: this.email,
+            password: this.password,
+          });
+  
+          // const jwtToken = response.data.token;
+          // localStorage.setItem("jwt", jwtToken);
+  
+        } catch (error) {
+          this.errorMessage = "Ошибка регистрации: " + (error.response?.data?.message || error.message);
+        } finally {
+          this.isSubmitting = false;
+        }
       },
     },
   };
