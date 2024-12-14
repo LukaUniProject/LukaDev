@@ -1,22 +1,26 @@
 <template>
-    <div class="auth-container">
-      <button class="back-button" @click="goBack">← Назад</button>
-      <div class="form-container">
-        <h2>Вход</h2>
-        <form @submit.prevent="submitForm">
-          <div class="form-group">
-            <label for="email">Электронная почта</label>
-            <input type="email" id="email" v-model="email" required />
-          </div>
-          <div class="form-group">
-            <label for="password">Пароль</label>
-            <input type="password" id="password" v-model="password" required />
-          </div>
-          <button type="submit" class="submit-button">Войти</button>
-        </form>
+  <div class="auth-container">
+    <button class="back-button" @click="goBack">← Назад</button>
+    <div class="form-container">
+      <h2>Вход</h2>
+      <form @submit.prevent="submitForm">
+        <div class="form-group">
+          <label for="email">Электронная почта</label>
+          <input type="email" id="email" v-model="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" id="password" v-model="password" required />
+        </div>
+        <button type="submit" class="submit-button">Войти</button>
+      </form>
+      <div class="if-not-container">
+        <p>Если вы не зарегистированы -</p>
+        <a href="/register">Зарегистрироваться</a>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from "axios";
@@ -58,7 +62,6 @@
     },
   };
   </script>
-  
   
   <style scoped>
   .auth-container {

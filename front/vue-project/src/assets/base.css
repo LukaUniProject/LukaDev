@@ -20,29 +20,49 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
+  --color-background: #222222;
+  --color-background-light: #333333;
+  --color-border: #444444;
+  --color-heading: #ffffff;
+  --color-text-muted: #e8e8e8;
+  --color-accent: #9f6496 ;
+  --color-accent-hover: #7b466a;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-scroll-indicator: #bbbbbb;
+  --border-radius: 10px;
+  --transition-speed: 0.3s;
 
+  /*!* Custom colors for this project *!*/
+  /*--color-background: #f8f8f8; !* Light background for readability *!*/
+  /*--color-background-light: #d391b0; !* Light accent background *!*/
+  /*--color-border: #cccccc; !* Soft gray borders *!*/
+  /*--color-heading: #333333; !* Dark text for headings *!*/
+  /*--color-text-muted: #666666; !* Muted text *!*/
+  /*--color-accent: #9f6496 ; !* Accent color for buttons *!*/
+  /*--color-accent-hover: #7b466a; !* Hover effect for buttons *!*/
 
+  /*--color-shadow: rgba(0, 0, 0, 0.1); !* Subtle shadows *!*/
+  /*--color-scroll-indicator: #7b466a; !* Scroll indicator *!*/
+  /*--border-radius: 10px;*/
+  /*--transition-speed: 0.3s;*/
 }
 
-/* semantic color variables for this project */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #e6e6e6;
-    --color-background-light: #fff;
-    --color-border: #ccc;
-    --color-heading: #333;
-    --color-text-muted: #666;
-    --color-accent: #d19b9b;
-    --color-accent-hover: #b88484;
-    --color-shadow: rgba(0, 0, 0, 0.1);
-    --color-scroll-indicator: #aaa;
-    --border-radius: 10px;
-    --transition-speed: 0.3s;
-  }
-  
-}
-
+/*!* Styles for dark mode *!*/
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --color-background: #222222;*/
+/*    --color-background-light: #333333;*/
+/*    --color-border: #444444;*/
+/*    --color-heading: #ffffff;*/
+/*    --color-text-muted: #bbbbbb;*/
+/*    --color-accent: #9f6496 ;*/
+/*    --color-accent-hover: #7b466a;*/
+/*    --color-shadow: rgba(0, 0, 0, 0.3);*/
+/*    --color-scroll-indicator: #bbbbbb;*/
+/*    --border-radius: 10px;*/
+/*    --transition-speed: 0.3s;*/
+/*  }*/
+/*}*/
 
 *,
 *::before,
@@ -56,23 +76,9 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+  transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
