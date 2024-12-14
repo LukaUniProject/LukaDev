@@ -1,3 +1,4 @@
+# API docs
 ## Структура проекта
 main.py - точка входа в приложение
 
@@ -12,16 +13,18 @@ services.py - сервисы для работы с данными (создан
 core - модуль для хранения основных настроек и функций
 
 ## Как открыть проект
-### Создайте и активируйте виртуальное окружение python:
-Для linux:
+### Перейдите в папку backend:
 ```bash
 cd backend
+```
+### Создайте и активируйте виртуальную среду:
+Для linux:
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 Для windows:
 ```bash
-cd backend
 python -m venv venv
 venv\Scripts\activate
 ```
@@ -37,15 +40,20 @@ uvicorn API.app.main:app --reload
 ```
 
 ## Повторный запуск проекта
-Для linux:
+### Перейдите в папку backend:
 ```bash
 cd backend
+```
+### Активируйте виртуальную среду:
+Для linux:
+```bash
 source venv/bin/activate
-uvicorn API.app.main:app --reload
 ```
 Для windows:
 ```bash
-cd backend
 venv\Scripts\activate
+```
+Запустите api:
+```bash
 uvicorn API.app.main:app --reload
 ```
