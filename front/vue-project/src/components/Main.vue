@@ -58,7 +58,7 @@
   </script>
   
   
-  <style scoped>
+<style scoped>
   .slide {
   display: flex;
   flex-direction: column;
@@ -78,36 +78,32 @@
 .logo {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-}
-
-.logo-image {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+  color: var(--color-heading);
 }
 
 .auth-links {
   display: flex;
-  gap: 15px;
+  gap: 1.5em;
 }
 
 .auth-link {
   text-decoration: none;
   color: var(--color-heading);
-  font-size: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid transparent;
 }
 
 .auth-link:hover {
-  text-decoration: underline;
+  border-bottom-color: #ffffff;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центрирование по вертикали */
-  align-items: center; /* Центрирование по горизонтали */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
   height: 100vh;
   background-color: var(--color-background);
 }
@@ -127,15 +123,16 @@
 }
 
 .text-block p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--color-text-muted);
   margin-bottom: 20px;
 }
 
 .action-button {
+  align-items: center;
   padding: 10px 20px;
   background-color: var(--color-accent);
-  color: var(--color-background-light);
+  color: var(--color-heading);
   border: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -165,5 +162,5 @@
   margin-bottom: 20px;
 }
 
-  </style>
+</style>
   
