@@ -27,9 +27,6 @@
         </div>
       </div>
   
-      <div class="scroll-indicator">
-        <span>⬇</span>
-      </div>
     </section>
   </template>
   

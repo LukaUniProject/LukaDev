@@ -41,17 +41,20 @@
       async submitForm() {
         this.isSubmitting = true; // Отображение индикатора загрузки
         this.errorMessage = ""; // Сброс ошибки
-  
+
         try {
           const response = await axios.post("http://127.0.0.1:8000/api/auth/login", {
             email: this.email,
             password: this.password,
           });
-  
+
           // Сохранение токена в localStorage
-          // const jwtToken = response.data.token;
-          // localStorage.setItem("jwt", jwtToken);
-  
+          const jwtToken = response.data.token;
+          localStorage.setItem("jwt", jwtToken);
+
+          // Редирект на страницу PersonalAccount
+          this.$router.push({ name: 'PersonalAccount' });
+
         } catch (error) {
           this.errorMessage =
             "Ошибка входа: " + (error.response?.data?.detail || error.message);
