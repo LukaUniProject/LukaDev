@@ -26,6 +26,9 @@
           Зарегистрироваться
         </button>
       </form>
+      <div class="if-not-container">
+        <p>Если вы уже зерегистрированы - <a href="/login">Войти</a></p>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@
 import axios from "axios";
 
 export default {
+  name: "Register",
   data() {
     return {
       username: "",
@@ -44,9 +48,10 @@ export default {
       isSubmitting: false,
     };
   },
+
   methods: {
     goBack() {
-      this.$router.go(-1);
+      this.$router.push({ name: 'home' });
     },
     async submitForm() {
       // Проверка на совпадение паролей
@@ -158,7 +163,7 @@ input[type="password"]:focus {
   width: 100%;
   padding: 0.8em;
   background-color: var(--color-accent);
-  color: var(--color-background-light);
+  color: var(--color-text-muted);
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -172,15 +177,19 @@ input[type="password"]:focus {
 }
 
 .submit-button:active {
-  background-color: var(--color-accent-active);
+  background-color: var(--color-accent);
 }
 
 .submit-button:focus {
   outline: none;
 }
 
-.submit-button:disabled {
-  background-color: var(--color-disabled);
-  cursor: not-allowed;
+.if-not-container {
+
+  color: var(--color-text-muted);
+}
+
+.if-not-container a {
+  color: var(--color-accent);
 }
 </style>

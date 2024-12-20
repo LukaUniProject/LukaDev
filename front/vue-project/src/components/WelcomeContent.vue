@@ -12,7 +12,7 @@
     <button v-if="!started" class="start-button" @click="start">Начать</button>
 
     <!-- Новый контент после нажатия на "Начать" -->
-    <div v-if="started">
+    <div v-if="started" class="chat-content">
       <h1 class="choose-photo-text">Выберите свою фотографию</h1>
 
       <!-- Кнопка для выбора файла -->
@@ -143,10 +143,18 @@ export default {
   background-color: var(--color-accent-hover); /* Цвет кнопки при наведении */
 }
 
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 72px;
+  align-items: center;
+  height: auto;
+}
+
 .choose-photo-text {
   font-size: 1.5rem;
+  margin-top: 30px;
   color: white;
-  margin-top: 20px;
 }
 
 .file-input-label {
@@ -175,8 +183,8 @@ export default {
 }
 
 .selected-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
 }
 
@@ -202,6 +210,7 @@ export default {
   display: flex;
   justify-content: space-between; /* Располагаем квадраты по бокам кнопки */
   margin-top: 30px;
+  margin-bottom: 30px;
   width: 100%; /* Занимаем всю ширину */
   padding: 0 20px; /* Отступы по бокам */
 }

@@ -12,8 +12,6 @@
                 </div>
             </div>
         </div>
-
-        
     </div>
 </template>
 
@@ -73,6 +71,7 @@ h2 {
 .history-list {
     flex: 1;
     overflow-y: auto;
+    scrollbar-width: thin;
     padding-right: 10px;
 }
 
@@ -112,6 +111,8 @@ h2 {
     color: var(--color-text-muted);
     line-height: 1.4;
 }
+
+
 
 .new-chat-button {
     padding: 10px 20px;

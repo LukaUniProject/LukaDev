@@ -31,6 +31,7 @@
   --color-scroll-indicator: #bbbbbb;
   --border-radius: 10px;
   --transition-speed: 0.3s;
+  --color-error: red;
 
   /*!* Custom colors for this project *!*/
   /*--color-background: #f8f8f8; !* Light background for readability *!*/
