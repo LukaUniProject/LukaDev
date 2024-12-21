@@ -22,6 +22,7 @@
 
   --color-background: #222222;
   --color-background-light: #333333;
+  --color-background-textbox: #d4c7d4;
   --color-border: #444444;
   --color-heading: #ffffff;
   --color-text-muted: #e8e8e8;
@@ -29,7 +30,7 @@
   --color-accent-hover: #7b466a;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-scroll-indicator: #bbbbbb;
-  --border-radius: 10px;
+  --border-radius: 16px;
   --transition-speed: 0.3s;
   --color-error: red;
 

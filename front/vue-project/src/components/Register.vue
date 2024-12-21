@@ -138,6 +138,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
+  background-color: var(--color-background-textbox);
   width: 100%;
   padding: 0.8em;
   margin-top: 0.5em;
@@ -184,6 +185,7 @@ input[type="password"]:focus {
 }
 
 .if-not-container {
+  margin-top: 10px;
   color: var(--color-text-muted);
 }
 

@@ -24,7 +24,7 @@
           практика показывает, что постоянный количественный рост и сфера нашей
           активности требуют определения и уточнения форм развития.
         </p>
-        <button class="action-button">Начать</button>
+        <button class="action-button" @click="onRegister">Начать</button>
       </div>
       <div class="image-block">
         <!-- <img src="/path/to/image.jpg" alt="Стилист" class="image" /> -->
@@ -129,6 +129,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  backdrop-filter: blur(1px);
 }
 
 .text-block {

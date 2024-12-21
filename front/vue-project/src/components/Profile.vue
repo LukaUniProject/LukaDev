@@ -126,6 +126,7 @@ label {
 
 input[type="email"],
 input[type="password"] {
+  background-color: var(--color-background-textbox);
   width: 100%;
   padding: 10px;
   border: 1px solid var(--color-border);
