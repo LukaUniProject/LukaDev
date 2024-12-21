@@ -5,8 +5,8 @@
       <h2>Регистрация</h2>
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="email">Электронная почта</label>
-          <input type="email" id="email" v-model="email" required />
+          <label for="username">Имя пользователя</label>
+          <input type="text" id="username" v-model="username" required />
         </div>
         <div class="form-group">
           <label for="password">Пароль</label>
@@ -26,60 +26,66 @@
           Зарегистрироваться
         </button>
       </form>
+      <div class="if-not-container">
+        <p>Если вы уже зарегистрированы - <a href="/login">Войти</a></p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
+  name: "Register",
   data() {
     return {
       username: "",
-      email: "",
       password: "",
       confirmPassword: "",
       errorMessage: "",
       isSubmitting: false,
-    };
+    }
   },
+
   methods: {
     goBack() {
-      this.$router.go(-1);
+      this.$router.push({ name: "home" })
     },
     async submitForm() {
       // Проверка на совпадение паролей
       if (this.password !== this.confirmPassword) {
-        this.errorMessage = "Пароли не совпадают.";
-        return;
+        this.errorMessage = "Пароли не совпадают."
+        return
       }
 
-      this.isSubmitting = true; // Включаем индикатор загрузки
-      this.errorMessage = ""; // Сбрасываем ошибки
+      this.isSubmitting = true // Включаем индикатор загрузки
+      this.errorMessage = "" // Сбрасываем ошибки
 
       try {
         // Отправка данных на сервер для регистрации
-        const response = await axios.post("http://127.0.0.1:8000/api/auth/register", {
-          email: this.email,
+        const response = await axios.post("http://127.0.0.1:8000/register", {
+          username: this.username,
           password: this.password,
-        });
+        })
 
-        // Сохранение токена в localStorage
-        const jwtToken = response.data.token;
-        localStorage.setItem("jwt", jwtToken);
-
-        // Редирект на страницу PersonalAccount
-        this.$router.push({ name: "PersonalAccount" });
+        // Проверяем успешный ответ
+        if (response.status === 200) {
+          // Перенаправление на страницу логина при успешной регистрации
+          this.$router.push({ path: "/login" })
+        } else {
+          this.errorMessage = "Ошибка регистрации: " + response.data.message
+        }
       } catch (error) {
         this.errorMessage =
-          "Ошибка регистрации: " + (error.response?.data?.detail || error.message);
+          "Ошибка регистрации: " +
+          (error.response?.data?.detail || error.message)
       } finally {
-        this.isSubmitting = false; // Отключаем индикатор загрузки
+        this.isSubmitting = false // Отключаем индикатор загрузки
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -90,7 +96,6 @@ export default {
   align-items: center;
   min-height: 100vh;
   background-color: var(--color-background);
-  padding: 0 20px;
 }
 
 .back-button {
@@ -132,7 +137,6 @@ label {
 }
 
 input[type="text"],
-input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 0.8em;
@@ -143,7 +147,6 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="email"]:focus,
 input[type="password"]:focus {
   border-color: var(--color-accent);
   outline: none;
@@ -159,7 +162,7 @@ input[type="password"]:focus {
   width: 100%;
   padding: 0.8em;
   background-color: var(--color-accent);
-  color: var(--color-background-light);
+  color: var(--color-text-muted);
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -173,16 +176,19 @@ input[type="password"]:focus {
 }
 
 .submit-button:active {
-  background-color: var(--color-accent-active);
+  background-color: var(--color-accent);
 }
 
 .submit-button:focus {
   outline: none;
 }
 
-.submit-button:disabled {
-  background-color: var(--color-disabled);
-  cursor: not-allowed;
+.if-not-container {
+  color: var(--color-text-muted);
+}
+
+.if-not-container a {
+  color: var(--color-accent);
 }
 
 /* Адаптивность для мобильных устройств */
@@ -191,59 +197,48 @@ input[type="password"]:focus {
     padding: 1.5em;
     max-width: 90%;
   }
-
   h2 {
     font-size: 1.5rem;
   }
-
   .form-group label {
     font-size: 1rem;
   }
-
   input[type="text"],
   input[type="email"],
   input[type="password"] {
     font-size: 0.9rem;
     padding: 0.75em;
   }
-
   .submit-button {
     font-size: 0.9rem;
     padding: 0.75em;
   }
-
   .back-button {
     font-size: 1.2em;
     top: 15px;
     left: 15px;
   }
 }
-
 @media (max-width: 480px) {
   .form-container {
     padding: 1em;
   }
-
   h2 {
     font-size: 1.3rem;
   }
-
   .form-group label {
     font-size: 0.9rem;
   }
-
   input[type="text"],
   input[type="email"],
   input[type="password"] {
     font-size: 0.9rem;
     padding: 0.7em;
   }
-
   .submit-button {
     font-size: 0.8rem;
     padding: 0.7em;
   }
-
   .back-button {
     font-size: 1.2em;
     top: 10px;

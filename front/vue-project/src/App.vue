@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <router-view /> <!-- Отображает компоненты маршрутов -->
+    <router-view />
+    <!-- Отображает компоненты маршрутов -->
   </div>
 </template>
-
 
 <style>
 #app {

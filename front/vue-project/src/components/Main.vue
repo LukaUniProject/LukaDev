@@ -21,8 +21,8 @@
         <p>
           Равным образом рамки и место обучения кадров представляет собой
           интересный эксперимент проверки новых предложений. Повседневная
-          практика показывает, что постоянный количественный рост и сфера
-          нашей активности требуют определения и уточнения форм развития.
+          практика показывает, что постоянный количественный рост и сфера нашей
+          активности требуют определения и уточнения форм развития.
         </p>
         <button class="action-button">Начать</button>
       </div>
@@ -34,48 +34,48 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router"
 
 export default {
   name: "Main",
   data() {
     return {
       snowflakesCount: 50, // Количество снежинок
-    };
+    }
   },
   setup() {
-      const router = useRouter();
-  
-      const onLogin = () => {
-        router.push({ name: 'login' });
-      };
-  
-      const onRegister = () => {
-        router.push({ name: 'register' });
-      };
-  
-      return {
-        onLogin,
-        onRegister,
-      };
-    },
+    const router = useRouter()
+
+    const onLogin = () => {
+      router.push({ name: "login" })
+    }
+
+    const onRegister = () => {
+      router.push({ name: "register" })
+    }
+
+    return {
+      onLogin,
+      onRegister,
+    }
+  },
   mounted() {
-    this.createSnowflakes();
+    this.createSnowflakes()
   },
   methods: {
     createSnowflakes() {
-      const snowflakes = document.querySelectorAll('.snowflake');
+      const snowflakes = document.querySelectorAll(".snowflake")
       snowflakes.forEach(snowflake => {
-        const startPosX = Math.random() * window.innerWidth;
-        const animationDuration = Math.random() * 3 + 5 + 's'; // случайное время падения
-        const delay = Math.random() * 5 + 's'; // случайная задержка
-        snowflake.style.left = `${startPosX}px`;
-        snowflake.style.animationDuration = animationDuration;
-        snowflake.style.animationDelay = delay;
-      });
-    }
-  }
-};
+        const startPosX = Math.random() * window.innerWidth
+        const animationDuration = Math.random() * 20 + 5 + "s" // случайное время падения
+        const delay = Math.random() * 10 + "s" // случайная задержка
+        snowflake.style.left = `${startPosX}px`
+        snowflake.style.animationDuration = animationDuration
+        snowflake.style.animationDelay = delay
+      })
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -192,7 +192,7 @@ export default {
   position: absolute;
   top: -10px;
   font-size: 36px; /* Размер эмодзи снежинки */
-  color: #8A2BE2; /* Фиолетовый цвет снежинки */
+  color: #8a2be2; /* Фиолетовый цвет снежинки */
   opacity: 0.8;
   text-shadow: 0 0 5px #fff; /* Белое свечение для контраста */
   animation: fall linear infinite;
