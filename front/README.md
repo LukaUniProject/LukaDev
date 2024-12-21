@@ -1,16 +1,24 @@
-# Frontend Service
+# Frondend
+
 ## Установка
+
 1. Перейдите в директорию с фронтендом:
+
 ```bash
-cd front/vue-project
+cd vue-project
 ```
-2. Убедитесь, что у вас установлен Node.js и npm.
+
+2. Убедитесь, что у вас установлен Node.js и npm
 3. Установите зависимости, выполнив команду:
+
 ```bash
 npm install --legacy-peer-deps
 ```
+
 ## Запуск
+
 Запустите фронтенд сервис, используя команду:
+
 ```bash
 npm run dev
 ```

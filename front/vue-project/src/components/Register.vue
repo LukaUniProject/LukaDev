@@ -5,8 +5,8 @@
       <h2>Регистрация</h2>
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="email">Электронная почта</label>
-          <input type="email" id="email" v-model="email" required />
+          <label for="username">Имя пользователя</label>
+          <input type="text" id="username" v-model="username" required />
         </div>
         <div class="form-group">
           <label for="password">Пароль</label>
@@ -27,64 +27,65 @@
         </button>
       </form>
       <div class="if-not-container">
-        <p>Если вы уже зерегистрированы - <a href="/login">Войти</a></p>
+        <p>Если вы уже зарегистрированы - <a href="/login">Войти</a></p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   name: "Register",
   data() {
     return {
       username: "",
-      email: "",
       password: "",
       confirmPassword: "",
       errorMessage: "",
       isSubmitting: false,
-    };
+    }
   },
 
   methods: {
     goBack() {
-      this.$router.push({ name: 'home' });
+      this.$router.push({ name: "home" })
     },
     async submitForm() {
       // Проверка на совпадение паролей
       if (this.password !== this.confirmPassword) {
-        this.errorMessage = "Пароли не совпадают.";
-        return;
+        this.errorMessage = "Пароли не совпадают."
+        return
       }
 
-      this.isSubmitting = true; // Включаем индикатор загрузки
-      this.errorMessage = ""; // Сбрасываем ошибки
+      this.isSubmitting = true // Включаем индикатор загрузки
+      this.errorMessage = "" // Сбрасываем ошибки
 
       try {
         // Отправка данных на сервер для регистрации
-        const response = await axios.post("http://127.0.0.1:8000/api/auth/register", {
-          email: this.email,
+        const response = await axios.post("http://127.0.0.1:8000/register", {
+          username: this.username,
           password: this.password,
-        });
+        })
 
-        // Сохранение токена в localStorage
-        const jwtToken = response.data.token;
-        localStorage.setItem("jwt", jwtToken);
-
-        // Редирект на страницу PersonalAccount
-        this.$router.push({ name: "PersonalAccount" });
+        // Проверяем успешный ответ
+        if (response.status === 200) {
+          // Перенаправление на страницу логина при успешной регистрации
+          this.$router.push({ path: "/login" })
+        } else {
+          this.errorMessage = "Ошибка регистрации: " + response.data.message
+        }
       } catch (error) {
         this.errorMessage =
-          "Ошибка регистрации: " + (error.response?.data?.detail || error.message);
+          "Ошибка регистрации: " +
+          (error.response?.data?.detail || error.message)
       } finally {
-        this.isSubmitting = false; // Отключаем индикатор загрузки
+        this.isSubmitting = false // Отключаем индикатор загрузки
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -136,8 +137,8 @@ label {
 }
 
 input[type="text"],
-input[type="email"],
 input[type="password"] {
+  background-color: var(--color-background-textbox);
   width: 100%;
   padding: 0.8em;
   margin-top: 0.5em;
@@ -147,7 +148,6 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="email"]:focus,
 input[type="password"]:focus {
   border-color: var(--color-accent);
   outline: none;
@@ -185,11 +185,66 @@ input[type="password"]:focus {
 }
 
 .if-not-container {
-
+  margin-top: 10px;
   color: var(--color-text-muted);
 }
 
 .if-not-container a {
   color: var(--color-accent);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5em;
+    max-width: 90%;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .form-group label {
+    font-size: 1rem;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 0.9rem;
+    padding: 0.75em;
+  }
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 0.75em;
+  }
+  .back-button {
+    font-size: 1.2em;
+    top: 15px;
+    left: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1em;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 0.9rem;
+    padding: 0.7em;
+  }
+  .submit-button {
+    font-size: 0.8rem;
+    padding: 0.7em;
+  }
+  .back-button {
+    font-size: 1.2em;
+    top: 10px;
+    left: 10px;
+  }
 }
 </style>
