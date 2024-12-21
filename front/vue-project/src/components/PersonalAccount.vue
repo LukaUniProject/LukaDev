@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import Story from "./Story.vue"
-import WelcomeContent from "./WelcomeContent.vue"
+import Story from "./Story.vue";
+import WelcomeContent from "./WelcomeContent.vue";
 
 export default {
   components: {
@@ -43,31 +43,31 @@ export default {
   data() {
     return {
       isMenuVisible: false, // Видимость меню
-    }
+    };
   },
   methods: {
     toggleMenu() {
-      this.isMenuVisible = !this.isMenuVisible // Переключение видимости меню
+      this.isMenuVisible = !this.isMenuVisible; // Переключение видимости меню
     },
     hideMenu() {
-      this.isMenuVisible = false // Скрыть меню при клике в любую область
+      this.isMenuVisible = false; // Скрыть меню при клике в любую область
     },
     goToProfile() {
       // Логика перехода в "Мой профиль"
-      this.$router.push("/profile") // Пример маршрута
+      this.$router.push("/profile"); // Пример маршрута
     },
     logout() {
       // Логика выхода из аккаунта
-      console.log("Выход из аккаунта")
+      console.log("Выход из аккаунта");
 
       // Удаление JWT токена
-      localStorage.removeItem("jwt")
+      localStorage.removeItem("jwt");
 
       // Редирект на домашнюю страницу
-      this.$router.push("/") // Переход на главную страницу (или любую другую)
+      this.$router.push("/"); // Переход на главную страницу (или любую другую)
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -206,70 +206,4 @@ export default {
   overflow-y: auto; /* Прокрутка для основного контента при необходимости */
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 10px;
-    flex-direction: column;
-  }
-  .logo {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  .settings-container {
-    margin-top: 10px;
-  }
-  .settings {
-    font-size: 1.5rem;
-  }
-  .main-container {
-    flex-direction: column; /* На мобильных устройствах боковая панель снижается */
-  }
-  .history-sidebar {
-    width: 100%; /* Боковая панель растягивается на всю ширину */
-    max-height: 200px; /* Ограничиваем высоту боковой панели */
-    padding: 0;
-    overflow-y: auto;
-  }
-  .content-area {
-    padding: 15px;
-  }
-  .dropdown-menu {
-    width: 100%; /* Делает меню растягиваемым на мобильных */
-  }
-  .dropdown-menu button {
-    padding: 0.5rem;
-  }
-  .settings-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: 1.2rem;
-  }
-  .settings-container {
-    right: 5px;
-  }
-  .settings {
-    font-size: 1.2rem;
-  }
-  .main-container {
-    flex-direction: column; /* Вертикальное размещение компонентов */
-  }
-  .history-sidebar {
-    display: none; /* Скрываем боковую панель на мобильных */
-  }
-  .content-area {
-    padding: 10px;
-  }
-  .dropdown-menu {
-    width: 100%; /* Делает меню растягиваемым */
-  }
-  .dropdown-menu button {
-    padding: 0.8rem;
-  }
-}
 </style>

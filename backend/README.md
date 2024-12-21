@@ -1,23 +1,59 @@
-# Backend
+# API docs
+## Структура проекта
+main.py - точка входа в приложение
 
-## Установка
+auth - модуль для аутентификации
 
-1. Открыть backend
-2. Создайте виртуальную среду
+routers.py - роутеры для обработки запросов
 
+schemas.py - схемы для валидации данных
+
+services.py - сервисы для работы с данными (создание и обработка jwt токенов)
+
+core - модуль для хранения основных настроек и функций
+
+## Как открыть проект
+### Перейдите в папку backend:
+```bash
+cd backend
+```
+### Создайте и активируйте виртуальную среду:
+Для linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Для windows:
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-3. Установите зависимости
-
+### Установите зависимости:
 ```bash
-pip install -r requirements.txt
+pip install -r API/requirements.txt
 ```
 
-4. Запустите сервер
-
+### Запустите проекта:
 ```bash
-uvicorn app.main:app --reload
+uvicorn API.app.main:app --reload
+```
+
+## Повторный запуск проекта
+### Перейдите в папку backend:
+```bash
+cd backend
+```
+### Активируйте виртуальную среду:
+Для linux:
+```bash
+source venv/bin/activate
+```
+Для windows:
+```bash
+venv\Scripts\activate
+```
+### Запустите api:
+```bash
+uvicorn API.app.main:app --reload
 ```

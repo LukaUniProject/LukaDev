@@ -19,12 +19,7 @@
       <label for="file-input" class="file-input-label">
         <div class="file-input-box">
           <!-- Если фото выбрано, отображаем его в рамке -->
-          <img
-            v-if="selectedFile"
-            :src="imageUrl"
-            alt="Selected"
-            class="selected-image"
-          />
+          <img v-if="selectedFile" :src="imageUrl" alt="Selected" class="selected-image" />
           <!-- Если фото не выбрано, показываем плюсик -->
           <span v-if="!selectedFile">+</span>
         </div>
@@ -39,36 +34,17 @@
 
       <!-- Кнопка "Подобрать лук" появляется только после выбора фотографии -->
       <button
-        v-if="selectedFile && !isLoading"
+        v-if="selectedFile"
         class="pick-look-button"
-        @click="uploadImage"
+        @click="pickLook"
       >
         Подобрать лук
       </button>
 
-      <!-- Спиннер загрузки -->
-      <div v-if="isLoading" class="spinner"></div>
-
-      <!-- Маленькие квадраты с результатами -->
-      <div v-if="analysisData" class="analysis-results">
-        <div
-          class="analysis-category"
-          v-for="(value, key) in analysisData.scores"
-          :key="key"
-        >
-          <h3>{{ value.name }}</h3>
-          <p>Оценка: {{ value.value }}</p>
-        </div>
-        <div class="recommendations">
-          <h3>Рекомендации:</h3>
-          <ul>
-            <li
-              v-for="(rec, index) in analysisData.recommendations"
-              :key="index"
-            >
-              <strong>{{ rec.name }}:</strong> {{ rec.text }}
-            </li>
-          </ul>
+      <!-- Маленькие квадраты с заглушками с картинками -->
+      <div v-if="showImagePlaceholders" class="image-placeholders">
+        <div v-for="(placeholder, index) in 5" :key="index" class="image-placeholder">
+          <img src="https://via.placeholder.com/100" alt="Placeholder" class="placeholder-image" />
         </div>
       </div>
     </div>
@@ -84,91 +60,46 @@ export default {
       isErasing: false,
       started: false, // Состояние для отслеживания начала процесса
       selectedFile: null, // Для хранения выбранного файла
-      imageUrl: "", // Для хранения URL изображения
-      isLoading: false, // Для отображения индикатора загрузки
-      analysisData: null, // Для сохранения анализа
-    }
+      imageUrl: '', // Для хранения URL изображения
+      showImagePlaceholders: false, // Для отображения маленьких квадратов
+    };
   },
   methods: {
     animateText() {
-      const speed = 250 // Скорость печати/стирания в миллисекундах
+      const speed = 250; // Скорость печати/стирания в миллисекундах
       if (!this.isErasing && this.displayedText.length < this.fullText.length) {
-        this.displayedText = this.fullText.slice(
-          0,
-          this.displayedText.length + 1
-        )
+        this.displayedText = this.fullText.slice(0, this.displayedText.length + 1);
       } else if (this.isErasing && this.displayedText.length > 0) {
-        this.displayedText = this.fullText.slice(
-          0,
-          this.displayedText.length - 1
-        )
+        this.displayedText = this.fullText.slice(0, this.displayedText.length - 1);
       } else {
-        this.isErasing = !this.isErasing
+        this.isErasing = !this.isErasing;
       }
-      setTimeout(this.animateText, speed)
+      setTimeout(this.animateText, speed);
     },
     start() {
-      this.started = true // Когда нажимают "Начать", показываем новый контент
+      this.started = true; // Когда нажимают "Начать", показываем новый контент
     },
     onFileChange(event) {
       // Получаем файл и сохраняем его
-      const file = event.target.files[0]
+      const file = event.target.files[0];
       if (file) {
-        this.selectedFile = file
-        this.imageUrl = URL.createObjectURL(file) // Создаем URL для выбранного изображения
+        this.selectedFile = file;
+        this.imageUrl = URL.createObjectURL(file); // Создаем URL для выбранного изображения
       }
     },
-    async uploadImage() {
-      const jwtToken = localStorage.getItem("jwt")
-      if (!jwtToken) {
-        alert("Пожалуйста, войдите в систему.")
-        return
-      }
-
-      const formData = new FormData()
-      formData.append("file", this.selectedFile)
-
-      this.isLoading = true
-      try {
-        const response = await fetch("http://127.0.0.1:8000/chats", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-          body: formData,
-        })
-
-        if (!response.ok) {
-          const error = await response.json()
-          console.error("Ошибка:", error)
-          alert("Произошла ошибка: " + error.detail)
-          return
-        }
-
-        const data = await response.json()
-        this.analysisData = this.formatAnalysisData(data)
-      } catch (error) {
-        console.error("Ошибка сети:", error)
-        alert("Произошла ошибка при подключении к серверу.")
-      } finally {
-        this.isLoading = false
-      }
-    },
-    formatAnalysisData(data) {
-      return {
-        scores: data.analysis, // Оценки
-        recommendations: data.recommendations, // Рекомендации
-      }
+    pickLook() {
+      // Логика для подбора лука
+      alert("Лук подобран!");
+      this.showImagePlaceholders = true; // Показать маленькие квадраты после нажатия на кнопку
     },
   },
   mounted() {
-    this.animateText() // Запускаем анимацию при монтировании компонента
+    this.animateText(); // Запускаем анимацию при монтировании компонента
   },
-}
+};
 </script>
 
 <style scoped>
-/* Стиль для компонента */
 .welcome-container {
   display: flex;
   flex-direction: column;
@@ -275,27 +206,29 @@ export default {
   color: white; /* Текст белый */
 }
 
-/* Стиль для панели анализа */
-.analysis-panel {
+.image-placeholders {
+  display: flex;
+  justify-content: space-between; /* Располагаем квадраты по бокам кнопки */
   margin-top: 30px;
-  width: 100%;
-  padding: 0 20px;
+  margin-bottom: 30px;
+  width: 100%; /* Занимаем всю ширину */
+  padding: 0 20px; /* Отступы по бокам */
 }
 
-.analysis-category {
+.image-placeholder {
+  width: 120px; /* Увеличили размер маленького квадрата */
+  height: 120px;
   background-color: var(--color-background-light);
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: var(--border-radius);
+  border: 2px dashed var(--color-border);
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.analysis-category h3 {
-  font-size: 1.2rem;
-  margin: 0 0 10px;
-}
-
-.analysis-category p {
-  font-size: 1rem;
-  color: var(--color-text-muted);
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

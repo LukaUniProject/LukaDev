@@ -1,6 +1,0 @@
-fastapi[all]
-pydantic[dotenv]
-sqlalchemy
-bcrypt
-python-jose
-passlib
