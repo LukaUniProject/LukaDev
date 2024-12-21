@@ -90,6 +90,7 @@ export default {
   align-items: center;
   min-height: 100vh;
   background-color: var(--color-background);
+  padding: 0 20px;
 }
 
 .back-button {
@@ -182,5 +183,71 @@ input[type="password"]:focus {
 .submit-button:disabled {
   background-color: var(--color-disabled);
   cursor: not-allowed;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5em;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 0.9rem;
+    padding: 0.75em;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 0.75em;
+  }
+
+  .back-button {
+    font-size: 1.2em;
+    top: 15px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1em;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 0.9rem;
+    padding: 0.7em;
+  }
+
+  .submit-button {
+    font-size: 0.8rem;
+    padding: 0.7em;
+  }
+
+  .back-button {
+    font-size: 1.2em;
+    top: 10px;
+    left: 10px;
+  }
 }
 </style>

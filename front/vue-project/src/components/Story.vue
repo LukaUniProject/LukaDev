@@ -12,8 +12,6 @@
                 </div>
             </div>
         </div>
-
-        
     </div>
 </template>
 
@@ -44,9 +42,11 @@ export default {
     },
     methods: {
         setListHeight() {
-            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+            const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
             const windowHeight = window.innerHeight;
-            this.listHeight = windowHeight - navbarHeight - 40;
+            const mobileScreenHeight = windowHeight - navbarHeight - 40;
+
+            this.listHeight = mobileScreenHeight > 300 ? mobileScreenHeight : 300;  // Минимальная высота для списка
         },
         createNewChat() {
             console.log("Создание нового чата!");
@@ -128,5 +128,73 @@ h2 {
 
 .new-chat-button:hover {
     background-color: var(--color-accent-hover);
+}
+
+/* Адаптивность */
+
+@media (max-width: 768px) {
+    /* Стилизуем заголовок */
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Изменяем кнопки */
+    .new-chat-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+    }
+
+    .history-image {
+        width: 80px;
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .history-text h3 {
+        font-size: 1rem;
+    }
+
+    .history-text p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Меньший шрифт и отступы */
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .new-chat-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 6px;
+    }
+
+    .history-image {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 8px;
+    }
+
+    .history-text h3 {
+        font-size: 0.9rem;
+    }
+
+    .history-text p {
+        font-size: 0.8rem;
+    }
 }
 </style>
